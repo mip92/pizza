@@ -1,18 +1,25 @@
 import React from "react";
+import {useSelector} from "react-redux";
 
 let CartItem = (props) => {
+
+   //let {id, size, type, price}=props.el
+console.log(props)
+    const {items} = useSelector((state) => ({
+        items: state.pizzasReducer.items,
+    }))
     return (
         <div className="cart__item">
             <div className="cart__item-img">
                 <img
                     className="pizza-block__image"
-                    src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+                    src={items[props.el.id.slice(1)].imageUrl}
                     alt="Pizza"
                 />
             </div>
             <div className="cart__item-info">
-                <h3>Сырный цыпленок</h3>
-                <p>тонкое тесто, 26 см.</p>
+                <h3>{items[props.el.id.slice(1)].name}</h3>
+                <p>{`${items[props.el.id.slice(1)].types[props.el.type]===0 ? "тонкое тесто,": "традиционное тесто,"} ${items[props.el.id.slice(1)].sizes[props.el.size]} см`}</p>
             </div>
             <div className="cart__item-count">
                 <div className="button button--outline button--circle cart__item-count-minus">
@@ -42,7 +49,7 @@ let CartItem = (props) => {
                 </div>
             </div>
             <div className="cart__item-price">
-                <b>770 ₽</b>
+                <b>{props.el.price} грн</b>
             </div>
             <div className="cart__item-remove">
                 <div className="button button--outline button--circle">

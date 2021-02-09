@@ -18,6 +18,15 @@ function Cart() {
         dispatch(dellAllCart())
 
     }
+    const z = () => {
+
+            Object.keys(selectors.items).forEach(function (k) {
+                /*this[k].map((elem, key)=><CartItem key={`${key}_s${elem}`} el={elem}/>)*/
+                this[k].map((elem, key) =><CartItem key={`${key}`} el={elem}/>)
+            }, selectors.items)
+
+    }
+
     return (selectors.totalCount === 0 ? <EmptyCart/> :
             <div className="container container--cart">
                 <div className="cart">
@@ -59,9 +68,10 @@ function Cart() {
                         </Link>
                     </div>
                     <div className="content__items">
-                        <CartItem/>
-                         {console.log(selectors.items.p1[0].size)}
-                    {selectors.items.map((el)=>console.log(el))}
+
+                        {(selectors.items.p0.map(el=><CartItem el={el}/>))}
+
+                            {z()} {/*функционал в работе*/}
 
                     </div>
                     <div className="cart__bottom">

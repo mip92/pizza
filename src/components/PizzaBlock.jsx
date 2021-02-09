@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import Loader from "./Loader";
 import Button from "./Button";
 import {addPizzaToCart} from "../redux/actions/cartAC";
-import cartReducer from "../redux/reducers/cartReducer";
 
 function PizzaBlock(props) {
     const selectors = useSelector((state) => ({

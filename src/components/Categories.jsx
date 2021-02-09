@@ -30,7 +30,6 @@ import {setCategory} from "../redux/actions/filtersAC";
 }*/
 
 const Categories = React.memo(function Categories({items, pizzas}) {
-    console.log(pizzas.length)
         const dispatch = useDispatch();
         const [activeItem, setActiveItem] = useState(0)
 
