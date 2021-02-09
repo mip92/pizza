@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import {useDispatch} from "react-redux";
+import {setCategory} from "../redux/actions/filtersAC";
 
 /*class Categories extends  React.Component{
     state={
@@ -27,25 +29,28 @@ import React, {useState} from 'react'
     }
 }*/
 
-function Categories({items}) {
-    const[activeItem, setActiveItem]=useState(0)
-   // const[count, setCount]=useState(0)
+const Categories = React.memo(function Categories({items, pizzas}) {
+    console.log(pizzas.length)
+        const dispatch = useDispatch();
+        const [activeItem, setActiveItem] = useState(0)
 
-    const onSelectItem=(index)=>{
-        setActiveItem(index)
-    //    setCount(count+1)
+        const onSelectItem = React.useCallback((index) => {
+            setActiveItem(index)
+            dispatch(setCategory(index))
+            // console.log(index)
+        }, [])
+        return (
+            <div className="categories">
+                <ul>
+                    {items && items.map((name, index) => <li key={`${name}_${index}`}
+                                                             onClick={() => onSelectItem(index)}
+                                                             className={activeItem === index ? "active" : ''}
+                    >{name}</li>)}
+                </ul>
+                {pizzas.length ===0 && <h1>enter into the console npm run server</h1>}
+            </div>
+        )
     }
-    return (
-        <div className="categories">
-            <ul>
-               {/*<h3>{count}</h3>*/}
-                {items && items.map((name, index)=><li key={`${name}_${index}`}
-                                              onClick={()=>onSelectItem(index)}
-                                              className={activeItem===index ? "active" : ''}
-                >{name}</li>)}
-            </ul>
-        </div>
-    )
-}
+)
 
 export default Categories

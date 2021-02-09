@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from "react-router-dom";
-import SortPopup from '../src/components/Header'
+import {Provider} from 'react-redux'
 import './scss/app.scss'
-
 import App from './App';
-
+import store from "./redux/store";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <BrowserRouter>
+    //<React.StrictMode>
+    <BrowserRouter>
+        <Provider store={store}>
             <App/>
-        </BrowserRouter>
-    </React.StrictMode>,
-    document.getElementById('root')
+        </Provider>
+    </BrowserRouter>
+    //</React.StrictMode>
+    , document.getElementById('root')
 );
 
